@@ -1,0 +1,37 @@
+{
+  "AWSEDokcerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "artyomsidun/multi-client",
+      "host": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "artyomsidun/multi-server",
+      "host": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "artyomsidun/multi-worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "artyomsidun/multi-nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "client",
+        "server"
+      ]
+    }
+  ]
+}
